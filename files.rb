@@ -1,0 +1,6 @@
+require_relative 'chefs_database'
+require_relative 'chef'
+require_relative 'restaurant'
+require_relative 'chef_tenure'
+require_relative 'critic'
+require_relative 'restaurant_review'
