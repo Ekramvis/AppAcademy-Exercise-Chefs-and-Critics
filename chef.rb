@@ -1,7 +1,10 @@
 require_relative 'chefs_database'
+require_relative 'model'
 
 class Chef
 	attr_accessor :id, :first_name, :last_name, :mentor
+
+	extend Model 
 
 	def initialize(options = {})
 		@id = options['id']
@@ -21,9 +24,8 @@ class Chef
 			:id => id
 		}
 
-		results = ChefsDatabase.instance.execute(query, query_args)
-		
-		results.map { |result| Chef.new(result) }
+		factory(self, query, query_args)
 	end
+
 
 end
