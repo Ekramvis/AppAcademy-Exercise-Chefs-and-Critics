@@ -14,7 +14,7 @@ neighborhood VARCHAR(50),
 cuisine VARCHAR(50)
 );
 
-/*connects chefs with restaurants*/
+
 CREATE TABLE chef_tenures
 (
 id INTEGER PRIMARY KEY,
@@ -22,7 +22,7 @@ chef_id INTEGER,
 restaurant_id INTEGER,
 start_date VARCHAR(50),
 end_date VARCHAR(50),
-head_chef ENUM(0, 1, NULL), 
+head_chef INTEGER, 
 FOREIGN KEY (chef_id) REFERENCES chefs(chef_id),
 FOREIGN KEY (restaurant_id) REFERENCES restaurants(restaurant_id)
 );
@@ -40,7 +40,7 @@ id INTEGER PRIMARY KEY,
 critic_id INTEGER,
 restaurant_id INTEGER,
 review_text VARCHAR(20000),
-score ENUM(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20),   
+score INTEGER,
 review_date VARCHAR(50),
 FOREIGN KEY (critic_id) REFERENCES critics(id),
 FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) 
@@ -57,7 +57,7 @@ VALUES ("George","K",NULL), /*id 1*/
 			 ("Dmitri","D",NULL), /*id 2*/
 			 ("Angelo","K",1), /*id 3*/
 			 ("George","D",2), /*id 4*/
-			 ("Honeybee","Kay",3), /*id 5*/
+			 ("Honeybee","Kay",3); /*id 5*/
 
 
 INSERT INTO restaurants (name, neighborhood, cuisine)
