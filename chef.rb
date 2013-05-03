@@ -6,6 +6,10 @@ class Chef
 
 	extend Model 
 
+	def self.chef_factory(query, query_args)
+		factory(self, query, query_args)
+	end
+	
 	def initialize(options = {})
 		@id = options['id']
 		@first_name = options['first_name']
@@ -24,8 +28,10 @@ class Chef
 			:id => id
 		}
 
-		factory(self, query, query_args)
+		Chef.chef_factory(query, query_args)
 	end
+
+	
 
 
 end

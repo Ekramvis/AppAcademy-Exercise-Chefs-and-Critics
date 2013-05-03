@@ -24,6 +24,10 @@ class Restaurant
 			:neighborhood => neighborhood
 		}
 
+		Restaurant.restaurant_factory(query, query_args)
+	end
+
+	def self.restaurant_factory(query, query_args)
 		factory(self, query, query_args)
 	end
 

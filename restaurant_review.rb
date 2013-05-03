@@ -3,6 +3,8 @@ require_relative 'chefs_database'
 class RestaurantReview
 	attr_accessor :id, :critic_id, :restaurant_id, :review_text, :score, :review_date
 
+	extend Model
+
 	def initialize(options = {})
 		@id = options['id']
 		@critic_id = options['critic_id']
@@ -12,4 +14,5 @@ class RestaurantReview
 		@review_date = options['review_date']
 	end
 
+	
 end
