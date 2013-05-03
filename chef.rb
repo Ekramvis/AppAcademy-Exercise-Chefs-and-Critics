@@ -46,5 +46,25 @@ class Chef
 		@num_proteges = ChefsDatabase.instance.execute(query)[0]['num']
 	end
 
+	def reviews
+		query = <<-SQL
+			SELECT rr.id, rr.critic_id, rr.restaurant_id, rr.review_text, rr.score, rr.review_date
+				FROM chefs AS c
+			 	JOIN chef_tenures AS ct
+			 	  ON c.id = ct.chef_id
+			 	JOIN restaurant_reviews AS rr
+			 		ON rr.restaurant_id = ct.restaurant_id
+			 WHERE c.id = :id
+			   AND rr.review_date BETWEEN ct.start_date AND ct.end_date
+		SQL
+
+		query_args = {
+			:id => @id
+		}
+
+		RestaurantReview.restaurant_review_factory(query, query_args)
+	end
+
+
 
 end

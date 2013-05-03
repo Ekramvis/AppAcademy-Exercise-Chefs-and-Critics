@@ -32,6 +32,42 @@ class Restaurant
 	end
 
 	
+	def self.top_restaurants(n)
+		query = <<-SQL
+			SELECT r.id, r.name, r.neighborhood, r.cuisine
+				FROM restaurants AS r
+				JOIN restaurant_reviews AS rr
+				  ON r.id = rr.restaurant_id
+		GROUP BY r.id
+	 	ORDER BY AVG(rr.score) DESC
+			 LIMIT #{n} 
+
+		SQL
+
+		query_args = {}
+
+		Restaurant.restaurant_factory(query, query_args)
+	end
+
+
+	def self.frequently_reviewed_restaurants(min_reviews)
+		query = <<-SQL
+			SELECT r.id, r.name, r.neighborhood, r.cuisine
+				FROM restaurants AS r
+				JOIN restaurant_reviews AS rr
+				  ON r.id = rr.restaurant_id
+		GROUP BY r.id
+		  HAVING COUNT(rr.score) > #{min_reviews}
+		SQL
+
+		query_args = {}
+
+		Restaurant.restaurant_factory(query, query_args)
+	end
+
+
+
+
 	def reviews
 		query = <<-SQL
 			SELECT *
