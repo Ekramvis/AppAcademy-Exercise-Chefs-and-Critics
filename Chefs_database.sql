@@ -57,7 +57,8 @@ VALUES ("George","K",NULL), /*id 1*/
 			 ("Dmitri","D",NULL), /*id 2*/
 			 ("Angelo","K",1), /*id 3*/
 			 ("George","D",2), /*id 4*/
-			 ("Honeybee","Kay",3); /*id 5*/
+			 ("Honeybee","Kay",3), /*id 5*/
+			 ("Amalia","K",1);
 
 
 INSERT INTO restaurants (name, neighborhood, cuisine)
@@ -91,6 +92,7 @@ INSERT INTO restaurant_reviews (critic_id, restaurant_id, review_text, score, re
 VALUES (1, 1, "This place is the best! Love the homemade pizza!", 20, '2011-04-03'),
 			 (2, 1, "Is Beautiful. I love the vegitables.", 20, '2007-06-01'),
 			 (3, 4, "Bangin' food.", 15, '2012-08-01'),
-			 (3, 3, "Started eating meat again because of this place.", 16, "2013-04-29"),
-			 (4, 3, "It's good, but too much work.", 12, '2011-09-13');
+			 (4, 3, "Started eating meat again because of this place.", 16, "2013-04-29"),
+			 (5, 3, "It's good, but too much work.", 12, '2011-09-13'),
+			 (5, 1, "The people here are weird.", 8, '2013-04-13');
 

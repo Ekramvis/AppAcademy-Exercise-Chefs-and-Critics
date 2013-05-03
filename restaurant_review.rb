@@ -5,6 +5,10 @@ class RestaurantReview
 
 	extend Model
 
+	def self.restaurant_review_factory(query, query_args)
+		factory(self, query, query_args)
+	end
+
 	def initialize(options = {})
 		@id = options['id']
 		@critic_id = options['critic_id']
@@ -14,5 +18,5 @@ class RestaurantReview
 		@review_date = options['review_date']
 	end
 
-	
+
 end
