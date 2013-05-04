@@ -67,4 +67,33 @@ class Chef
 
 
 
+	def co_workers
+		query = <<-SQL
+			SELECT cx.*
+			  FROM (SELECT other_ct.chef_id
+						  FROM (SELECT ct.* 
+										  FROM chefs AS c
+										  JOIN chef_tenures AS ct
+										    ON c.id = ct.chef_id
+										 WHERE c.id = #{@id}) AS my_ct
+
+						  JOIN (SELECT ct2.* 
+										  FROM chefs AS c2
+										  JOIN chef_tenures AS ct2
+										    ON c2.id = ct2.chef_id
+										 WHERE c2.id != #{@id}) AS other_ct
+
+						    ON my_ct.restaurant_id = other_ct.restaurant_id
+						 WHERE other_ct.start_date < my_ct.end_date
+						    OR my_ct.start_date < other_ct.end_date) AS oci
+				JOIN chefs AS cx
+				  ON cx.id = oci.chef_id
+		SQL
+
+		query_args = {}
+
+		Chef.chef_factory(query, query_args)
+	end
+
+
 end

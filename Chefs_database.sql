@@ -69,7 +69,7 @@ VALUES ("George's Kitchen","High Point","Vegetarian"), /*id 1*/
 
 
 INSERT INTO chef_tenures (chef_id, restaurant_id, start_date, end_date, head_chef)
-VALUES (1,1,'1985-01-01', NULL, 1),
+VALUES (1,1,'1985-01-01', '2013-05-01', 1),
 			 (2,2,'2004-06-15', '2011-02-01',1),
 			 (2,4,'2011-02-02', '2013-05-01',1),
 			 (3,1,'1995-01-01', '2000-09-01',0),

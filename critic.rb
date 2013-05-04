@@ -57,4 +57,24 @@ class Critic
 		@avg_review_score = ChefsDatabase.instance.execute(query)[0]['avg']
 	end
 
+
+
+	def unreviewed_restaurants
+		query = <<-SQL
+			SELECT r.id, r.name, r.neighborhood, r.cuisine
+			  FROM restaurants AS r
+			 WHERE r.id NOT IN (SELECT rr.restaurant_id 
+			 										  FROM restaurant_reviews AS rr
+			 										  JOIN critics AS c
+ 			 										  	ON rr.critic_id = c.id
+ 			 										 WHERE c.id = #{@id})
+		SQL
+
+		query_args = {}
+
+		Restaurant.restaurant_factory(query, query_args)
+	end
+
+
+
 end
