@@ -49,7 +49,10 @@ class Restaurant
 		Restaurant.restaurant_factory(query, query_args)
 	end
 
-
+# REV: I kind of think that the frequently reviewed restaurants
+# REV: should be sorted by the number of times they've been reviewed
+# REV: and with HAVING COUNT(r.id or rr.restaurant_id), but that's just
+# REV: nitpicking.
 	def self.frequently_reviewed_restaurants(min_reviews)
 		query = <<-SQL
 			SELECT r.id, r.name, r.neighborhood, r.cuisine

@@ -1,5 +1,5 @@
 require_relative 'chefs_database'
-
+# REV: Critic.rb looks sound.
 class Critic
 	attr_accessor :id, :screen_name, :avg_review_score
 
@@ -56,7 +56,6 @@ class Critic
 
 		@avg_review_score = ChefsDatabase.instance.execute(query)[0]['avg']
 	end
-
 
 
 	def unreviewed_restaurants

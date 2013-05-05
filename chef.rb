@@ -4,6 +4,9 @@ require_relative 'model'
 class Chef
 	attr_accessor :id, :first_name, :last_name, :mentor, :num_proteges
 
+# REV: Had no idea this 'extend' existed. So it's like a class methods
+# REV: only version of include? Since we're heavily using factory methods,
+# REV: this is probably the better option.
 	extend Model 
 
 	def self.chef_factory(query, query_args)
@@ -46,6 +49,9 @@ class Chef
 		@num_proteges = ChefsDatabase.instance.execute(query)[0]['num']
 	end
 
+# REV: You can use table_name.* (so rr.*) instead of this huge 
+# REV: chain. This trick should save you some typing since you've 
+# REV: written every column out in every join table in every class.
 	def reviews
 		query = <<-SQL
 			SELECT rr.id, rr.critic_id, rr.restaurant_id, rr.review_text, rr.score, rr.review_date
@@ -66,7 +72,16 @@ class Chef
 	end
 
 
+# REV: Was this completed? I'm confused because I don't even see
+# REV: closing parentheses for the FROM statements at the
+# REV: bottom of the giant query... I've read a couple other students'
+# REV: and the solution, and it's like we all solved it a different way.	
 
+# REV: In another note, regarding the two subqueries my_ct and 
+# REV: other_ct (especially in my_ct), why did you bother joining the 
+# REV: chefs table to it when you don't even use it? The chef_id and 
+# REV: chefs.id values are the same, so it's not like you need one to 
+# REV: translate into the other.
 	def co_workers
 		query = <<-SQL
 			SELECT cx.*
